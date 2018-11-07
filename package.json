@@ -1,0 +1,24 @@
+{
+  "name": "fc_todo",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native run-ios --simulator='iPhone X'",
+    "test": "jest",
+    "clear": "rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && rm -rf $TMPDIR/haste-map-react-native-packager-*"
+  },
+  "dependencies": {
+    "native-base": "^2.8.1",
+    "react": "16.7.0-alpha.0 - next",
+    "react-native": "0.57.4"
+  },
+  "devDependencies": {
+    "babel-jest": "23.6.0",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.49.0",
+    "react-test-renderer": "16.6.0-alpha.8af6728"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
