@@ -1,53 +1,34 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
-import React, { Component } from 'react';
-import { Platform, StyleSheet, SafeAreaView } from 'react-native';
-import { Container, Button, Text } from 'native-base';
+import React, { memo }  from 'react';
+import Layout from "./component/Layout";
 import TodoList from "./component/TodoList";
+import AddTodoForm from "./component/AddTodoForm";
 
+import { useInputValue, useTodos } from "./hooks/TodoList";
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+const App = memo((props) => {
+  const { inputValue, changeInput, clearInput } = useInputValue();
+  const { todos, addTodo, checkTodo, removeTodo } = useTodos();
 
-type Props = {};
-
-const App = (props:Props) => {
-  const { value } = props;
+  const clearInputAndAddTodo = _ => {
+    console.debug('clearInputAndAddTodo', {inputValue}, _)
+    clearInput();
+    addTodo(inputValue);
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <TodoList/>
-    </SafeAreaView>
+      <Layout>
+        <AddTodoForm
+          inputValue={inputValue}
+          changeInput={changeInput}
+          onIconPress={clearInputAndAddTodo}
+        />
+        <TodoList
+          items={todos}
+          onItemCheck={idx => checkTodo(idx)}
+          onItemRemove={idx => removeTodo(idx)}
+        />
+      </Layout>
   );
-};
+});
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
