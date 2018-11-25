@@ -1,0 +1,3 @@
+rootProject.name = 'hooks_todo'
+
+include ':app'
